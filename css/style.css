@@ -1,3 +1,4 @@
+/* Reset e Fontes */
 * {
     margin: 0;
     padding: 0;
@@ -62,6 +63,11 @@ h1 {
     background-color: #3c5aa6;
 }
 
+#search-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
 .pokemon-screen {
     background-color: #88c070;
     border: 5px solid #333;
@@ -93,6 +99,16 @@ h1 {
     font-size: 0.9rem;
 }
 
+.type-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 2px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 footer {
     text-align: center;
     margin-top: 20px;
@@ -100,7 +116,7 @@ footer {
     color: #777;
 }
 
-/* Tipos de Pokémon */
+/* Cores para tipos de Pokémon */
 .type-normal { background-color: #A8A878; }
 .type-fire { background-color: #F08030; }
 .type-water { background-color: #6890F0; }
