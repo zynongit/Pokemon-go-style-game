@@ -1,11 +1,24 @@
-document.getElementById("search-btn").addEventListener("click", async () => {
-    const input = document.getElementById("pokemon-id").value.trim();
-    if (!input) {
-        alert("Digite um número ou nome!");
-        return;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    const searchBtn = document.getElementById("search-btn");
+    const pokemonInput = document.getElementById("pokemon-input");
 
-    const pokemon = await fetchPokemon(input.toLowerCase()); // Aceita nome ou ID
-    if (pokemon) displayPokemon(pokemon);
-    else alert("Pokémon não encontrado!");
+    searchBtn.addEventListener("click", async () => {
+        const query = pokemonInput.value.trim();
+        if (!query) {
+            alert("Digite um nome ou número!");
+            return;
+        }
+
+        const pokemon = await fetchPokemon(query);
+        if (pokemon) {
+            updateDisplay(pokemon);
+        } else {
+            alert("Pokémon não encontrado!");
+        }
+    });
+
+    // Busca ao pressionar Enter
+    pokemonInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") searchBtn.click();
+    });
 });
