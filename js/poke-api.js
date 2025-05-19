@@ -1,21 +1,30 @@
-function displayPokemon(pokemon) {
-    const displayDiv = document.getElementById("pokemon-display");
-    const infoDiv = document.getElementById("pokemon-info");
+async function fetchPokemon(query) {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`);
+        if (!response.ok) throw new Error("Pokémon não encontrado!");
+        return await response.json();
+    } catch (error) {
+        console.error("Erro na API:", error);
+        return null;
+    }
+}
 
-    // Pega a imagem oficial (ou uma alternativa se não existir)
-    const sprite = pokemon.sprites.other["official-artwork"]?.front_default 
-                || pokemon.sprites.front_default;
+function updateDisplay(pokemon) {
+    const sprite = document.getElementById("pokemon-sprite");
+    const name = document.getElementById("pokemon-name");
+    const id = document.getElementById("pokemon-id");
+    const type = document.getElementById("pokemon-type");
+    const height = document.getElementById("pokemon-height");
+    const weight = document.getElementById("pokemon-weight");
+    const abilities = document.getElementById("pokemon-abilities");
 
-    displayDiv.innerHTML = `
-        <img src="${sprite}" alt="${pokemon.name}" class="pokemon-sprite">
-        <h2>${pokemon.name.toUpperCase()}</h2>
-        <p>Nº ${pokemon.id}</p>
-    `;
-
-    infoDiv.innerHTML = `
-        <p><strong>Tipo:</strong> ${pokemon.types.map(t => t.type.name).join(", ")}</p>
-        <p><strong>Altura:</strong> ${pokemon.height / 10}m</p>
-        <p><strong>Peso:</strong> ${pokemon.weight / 10}kg</p>
-        <p><strong>Habilidades:</strong> ${pokemon.abilities.map(a => a.ability.name).join(", ")}</p>
-    `;
+    // Atualiza os dados
+    sprite.src = pokemon.sprites.other["official-artwork"]?.front_default || pokemon.sprites.front_default;
+    sprite.classList.remove("hidden");
+    name.textContent = pokemon.name.toUpperCase();
+    id.textContent = `Nº ${pokemon.id}`;
+    type.textContent = pokemon.types.map(t => t.type.name).join(", ");
+    height.textContent = `${pokemon.height / 10}m`;
+    weight.textContent = `${pokemon.weight / 10}kg`;
+    abilities.textContent = pokemon.abilities.map(a => a.ability.name).join(", ");
 }
