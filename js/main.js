@@ -1,19 +1,31 @@
-document.getElementById("search-btn").addEventListener("click", async () => {
-    const input = document.getElementById("pokemon-input").value.trim().toLowerCase(); // Garante minúsculas
-    if (!input) {
-        alert("Digite um nome ou número!");
-        return;
-    }
+// main.js
+import { PokeAPI, displayPokemon } from './poke-api.js';
 
-    try {
-        const pokemon = await fetchPokemon(input);
-        if (pokemon) {
-            updateDisplay(pokemon);
-        } else {
-            alert("Pokémon não encontrado! Use o nome em inglês (ex: mimikyu) ou número.");
+document.addEventListener('DOMContentLoaded', () => {
+    const api = new PokeAPI();
+    const searchBtn = document.getElementById('search-btn');
+    const pokemonInput = document.getElementById('pokemon-input');
+
+    // Busca ao clicar no botão
+    searchBtn.addEventListener('click', async () => {
+        const query = pokemonInput.value.trim();
+        if (!query) return alert('Digite um nome ou número!');
+
+        try {
+            const pokemon = await api.getPokemonData(query);
+            if (pokemon) {
+                displayPokemon(pokemon);
+            } else {
+                alert('Pokémon não encontrado! Use o nome em inglês ou número.');
+            }
+        } catch (error) {
+            alert('Erro na busca. Verifique o console para detalhes.');
+            console.error(error);
         }
-    } catch (error) {
-        alert("Erro na busca. Verifique o console (F12) para detalhes.");
-        console.error(error);
-    }
+    });
+
+    // Busca ao pressionar Enter
+    pokemonInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchBtn.click();
+    });
 });
