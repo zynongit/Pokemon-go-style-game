@@ -3,21 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Web - Estilo Red</title>
+    <title>Pokédex Completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Pokédex</h1>
-        <div class="screen">
-            <div id="pokemon-display"></div>
-            <div class="controls">
-                <input type="number" id="pokemon-id" placeholder="Nº do Pokémon (1-151)" min="1" max="151">
-                <button id="search-btn">Buscar</button>
+    <div class="container">
+        <header>
+            <h1>POKÉDEX</h1>
+            <div class="search-box">
+                <input type="text" id="pokemon-input" placeholder="Nome ou Nº (ex: Pikachu, 25, 1008)">
+                <button id="search-btn">BUSCAR</button>
             </div>
-            <div id="pokemon-info"></div>
-        </div>
+        </header>
+
+        <main>
+            <div class="pokemon-screen">
+                <div id="pokemon-display">
+                    <img id="pokemon-sprite" src="" alt="Sprite" class="hidden">
+                    <h2 id="pokemon-name">------</h2>
+                    <p id="pokemon-id">Nº ---</p>
+                </div>
+                <div id="pokemon-info">
+                    <p><strong>Tipo:</strong> <span id="pokemon-type">---</span></p>
+                    <p><strong>Altura:</strong> <span id="pokemon-height">---</span></p>
+                    <p><strong>Peso:</strong> <span id="pokemon-weight">---</span></p>
+                    <p><strong>Habilidades:</strong> <span id="pokemon-abilities">---</span></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Feito com PokeAPI | Gen 1-9</p>
+        </footer>
     </div>
+
     <script src="js/poke-api.js"></script>
     <script src="js/main.js"></script>
 </body>
