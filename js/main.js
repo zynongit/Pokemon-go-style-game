@@ -1,24 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const searchBtn = document.getElementById("search-btn");
-    const pokemonInput = document.getElementById("pokemon-input");
+document.getElementById("search-btn").addEventListener("click", async () => {
+    const input = document.getElementById("pokemon-input").value.trim().toLowerCase(); // Garante minúsculas
+    if (!input) {
+        alert("Digite um nome ou número!");
+        return;
+    }
 
-    searchBtn.addEventListener("click", async () => {
-        const query = pokemonInput.value.trim();
-        if (!query) {
-            alert("Digite um nome ou número!");
-            return;
-        }
-
-        const pokemon = await fetchPokemon(query);
+    try {
+        const pokemon = await fetchPokemon(input);
         if (pokemon) {
             updateDisplay(pokemon);
         } else {
-            alert("Pokémon não encontrado!");
+            alert("Pokémon não encontrado! Use o nome em inglês (ex: mimikyu) ou número.");
         }
-    });
-
-    // Busca ao pressionar Enter
-    pokemonInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") searchBtn.click();
-    });
+    } catch (error) {
+        alert("Erro na busca. Verifique o console (F12) para detalhes.");
+        console.error(error);
+    }
 });
