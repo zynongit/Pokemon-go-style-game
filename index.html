@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Web - Estilo Red</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Pokédex</h1>
+        <div class="screen">
+            <div id="pokemon-display"></div>
+            <div class="controls">
+                <input type="number" id="pokemon-id" placeholder="Nº do Pokémon (1-151)" min="1" max="151">
+                <button id="search-btn">Buscar</button>
+            </div>
+            <div id="pokemon-info"></div>
+        </div>
+    </div>
+    <script src="js/poke-api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
