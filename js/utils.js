@@ -1,13 +1,13 @@
-// utils.js
-export function formatPokemonName(name) {
-    return name.replace(/-/g, ' ')
-        .split(' ')
+// Formata nomes (ex: "mimikyu-disguised" → "Mimikyu Disguised")
+export function formatName(name) {
+    return name.split('-')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 }
 
+// Retorna cor hexadecimal para tipos
 export function getTypeColor(type) {
-    const typeColors = {
+    const colors = {
         normal: '#A8A878',
         fire: '#F08030',
         water: '#6890F0',
@@ -27,5 +27,5 @@ export function getTypeColor(type) {
         steel: '#B8B8D0',
         fairy: '#EE99AC'
     };
-    return typeColors[type] || '#777';
+    return colors[type] || '#777777';
 }
